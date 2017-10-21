@@ -15,11 +15,11 @@ import java.util.List;
 
 public class CostListAdapter extends BaseAdapter{
 
-    private List<CostBean> mList;
+    private List<DailyBean> mList;
     private Context mContext;
     private LayoutInflater mLayoutInflater;
 
-    public CostListAdapter(Context context,List<CostBean> list){
+    public CostListAdapter(Context context,List<DailyBean> list){
         mContext=context;
         mList=list;
         mLayoutInflater=LayoutInflater.from(context);
@@ -53,10 +53,10 @@ public class CostListAdapter extends BaseAdapter{
         }else{
             viewHolder=(ViewHolder)convertView.getTag();
         }
-        CostBean bean=mList.get(position);
-        viewHolder.mTvCostTitle.setText(bean.costTitle);
+        DailyBean bean=mList.get(position);
+        viewHolder.mTvCostTitle.setText(bean.addAccount);
         viewHolder.mTvCostDate.setText(bean.costDate);
-        viewHolder.mTvCostMoney.setText(bean.costMoney);
+        viewHolder.mTvCostMoney.setText(bean.addPassword);
         return convertView;
     }
 
