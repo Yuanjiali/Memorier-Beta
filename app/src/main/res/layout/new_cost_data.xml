@@ -5,19 +5,60 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:id="@+id/patient_top"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:background="#058d49"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="vertical" >
+        <TextView
+            android:id="@+id/txtPatient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="新建"
+            android:textColor="#FFF"
+            android:textSize="25sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/et_cost_title_t"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_margin="8dp"
+        android:text="账号："/>
+
     <EditText
         android:id="@+id/et_cost_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        android:hint="Cost Title" />
+        android:hint="请输入账号" />
+
+    <TextView
+        android:id="@+id/et_cost_title_m"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_margin="8dp"
+        android:text="密码："/>
 
     <EditText
         android:id="@+id/et_cost_money"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        android:hint="Cost Money" />
+        android:hint="请输入密码" />
+
+    <TextView
+        android:id="@+id/et_cost_title_d"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:layout_margin="9dp"
+        android:text="账号创建日期："/>
 
     <DatePicker
         android:id="@+id/dp_cost_date"
