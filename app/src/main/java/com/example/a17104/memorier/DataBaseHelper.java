@@ -30,12 +30,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "cost_money varchar)");
     }
     //插入数据
-    public void insertCost(CostBean costBean){
+    public void insertCost(DailyBean dailyBean){
         SQLiteDatabase database=getWritableDatabase();
         ContentValues cv=new ContentValues();
-        cv.put(COST_TITLE,costBean.costTitle);
-        cv.put(COST_DATE,costBean.costDate);
-        cv.put(COST_MONEY,costBean.costMoney);
+        cv.put(COST_TITLE,dailyBean.addAccount);
+        cv.put(COST_DATE,dailyBean.costDate);
+        cv.put(COST_MONEY,dailyBean.addPassword);
         database.insert(MEMORIER_COST,null,cv);
     }
 

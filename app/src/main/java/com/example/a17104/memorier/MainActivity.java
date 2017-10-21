@@ -20,7 +20,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private List<CostBean> mCostBeanList;
+    private List<DailyBean> mCostBeanList;
     private DataBaseHelper mDatabaseHelper;
     private CostListAdapter adapter;
 
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         mDatabaseHelper=new DataBaseHelper(this);
         mCostBeanList=new ArrayList<>();
-        ListView costList = (ListView)findViewById(R.id.lv_main);
+        final ListView costList = (ListView)findViewById(R.id.lv_main);
         initCostData();
         adapter = new CostListAdapter(this, mCostBeanList);
         costList.setAdapter(adapter);
@@ -46,24 +46,24 @@ public class MainActivity extends AppCompatActivity {
                 AlertDialog.Builder builder=new AlertDialog.Builder(MainActivity.this);
                 LayoutInflater inflate=LayoutInflater.from(MainActivity.this);
                 View viewDialog= inflate.inflate(R.layout.new_cost_data,null);
-                final EditText title= (EditText) viewDialog.findViewById(R.id.et_cost_title);
-                final EditText money= (EditText) viewDialog.findViewById(R.id.et_cost_money);
+                final EditText account= (EditText) viewDialog.findViewById(R.id.et_cost_title);
+                final EditText password= (EditText) viewDialog.findViewById(R.id.et_cost_money);
                 final DatePicker date= (DatePicker) viewDialog.findViewById(R.id.dp_cost_date);
                 builder.setView(viewDialog);
-                builder.setTitle("新建");
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        CostBean costBean=new CostBean();
-                        costBean.costTitle=title.getText().toString();
-                        costBean.costMoney=money.getText().toString();
-                        costBean.costDate=date.getYear()+"-"+(date.getMonth()+1)+"-"+
-                                date.getDayOfMonth();
-                        mDatabaseHelper.insertCost(costBean);
-                        mCostBeanList.add(costBean);
-                        adapter.notifyDataSetChanged();
-                    }
-                });
+
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                DailyBean dailyBean = new DailyBean();
+                                dailyBean.addAccount = account.getText().toString();
+                                dailyBean.addPassword = password.getText().toString();
+                                dailyBean.costDate = date.getYear() + "-" + (date.getMonth() + 1) + "-" +
+                                        date.getDayOfMonth();
+                                mDatabaseHelper.insertCost(dailyBean);
+                                mCostBeanList.add(dailyBean);
+                                adapter.notifyDataSetChanged();
+                            }
+                        });
                 builder.setNegativeButton("Cancel",null);
                 builder.create().show();
             }
@@ -83,11 +83,11 @@ public class MainActivity extends AppCompatActivity {
         Cursor cursor= mDatabaseHelper.getAllCostData();
         if(cursor!=null){
             while(cursor.moveToNext()){
-                CostBean costBean=new CostBean();
-                costBean.costTitle=cursor.getString(cursor.getColumnIndex("cost_title"));
-                costBean.costDate=cursor.getString(cursor.getColumnIndex("cost_date"));
-                costBean.costMoney=cursor.getString(cursor.getColumnIndex("cost_money"));
-                mCostBeanList.add(costBean);
+                DailyBean dailyBean=new DailyBean();
+                dailyBean.addAccount=cursor.getString(cursor.getColumnIndex("cost_title"));
+                dailyBean.costDate=cursor.getString(cursor.getColumnIndex("cost_date"));
+                dailyBean.addPassword=cursor.getString(cursor.getColumnIndex("cost_money"));
+                mCostBeanList.add(dailyBean);
             }
             cursor.close();
         }
